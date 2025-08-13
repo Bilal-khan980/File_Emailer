@@ -22,10 +22,10 @@ app.post("/upload", upload.single("file"), async (req, res) => {
     port: 465,
     secure: true, // SSL
     auth: {
-      //user: "empoweredai3@gmail.com", // Your Gmail
-      //pass: "ktcv bbgt yxab tbyy", // App password from Google
-      user: process.env.EMAIL_USER, // Your Gmail
-      pass: process.env.EMAIL_PASSWORD, // App password from Google
+      user: "empoweredai3@gmail.com", // Your Gmail
+      pass: "ktcv bbgt yxab tbyy", // App password from Google
+      //user: process.env.EMAIL_USER, // Your Gmail
+      //pass: process.env.EMAIL_PASSWORD, // App password from Google
     },
   });
 
