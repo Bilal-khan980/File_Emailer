@@ -1,0 +1,26 @@
+{
+  "name": "file_emailer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bilal-khan980/File_Emailer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bilal-khan980/File_Emailer/issues"
+  },
+  "homepage": "https://github.com/Bilal-khan980/File_Emailer#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "nodemailer": "^7.0.5"
+  }
+}
