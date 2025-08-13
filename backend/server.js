@@ -24,13 +24,15 @@ app.post("/upload", upload.single("file"), async (req, res) => {
     auth: {
       user: "empoweredai3@gmail.com", // Your Gmail
       pass: "ktcv bbgt yxab tbyy", // App password from Google
+      //user: process.env.EMAIL_USER, // Your Gmail
+      //pass: process.env.EMAIL_PASSWORD, // App password from Google
     },
   });
 
   try {
     await transporter.sendMail({
       from: `"File Upload Service" <empoweredai3@gmail.com>`,
-      to: "matchmerchants224@gmail.com", // recipient
+      to: "bilalkhhan9900@gmail.com", // recipient
       subject: "New File Uploaded",
       text: `A new file has been uploaded: ${req.file.originalname}`,
       attachments: [
