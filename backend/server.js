@@ -22,8 +22,6 @@ app.post("/upload", upload.single("file"), async (req, res) => {
     port: 465,
     secure: true, // SSL
     auth: {
-      //user: "empoweredai3@gmail.com", // Your Gmail
-      //pass: "ktcv bbgt yxab tbyy", // App password from Google
       user: process.env.EMAIL_USER, // Your Gmail
       pass: process.env.EMAIL_PASSWORD, // App password from Google
     },
@@ -46,10 +44,10 @@ app.post("/upload", upload.single("file"), async (req, res) => {
     // Delete file after sending
     fs.unlinkSync(req.file.path);
 
-    res.send("✅ File sent to email successfully!");
+    res.send("Form submitted successfully!");
   } catch (err) {
     console.error(err);
-    res.status(500).send("❌ Error sending file");
+    res.status(500).send(" Error submitting");
   }
 });
 

@@ -11,14 +11,14 @@
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
         sans-serif;
-      background-color: #f5f5f5;
+      background-color: #f8fafc;
       min-height: 100vh;
     "
   >
     <!-- Header Section -->
     <div
       style="
-        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        background-color: #1e293b;
         color: white;
         text-align: center;
         padding: 40px 20px;
@@ -31,6 +31,9 @@
           font-size: 28px;
           font-weight: 600;
           letter-spacing: -0.5px;
+          border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+          padding-bottom: 15px;
+          display: inline-block;
         "
       >
         File Upload Application
@@ -43,78 +46,87 @@
       <div
         style="
           background: white;
-          border-radius: 8px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-          margin-bottom: 30px;
+          border-radius: 12px;
+          box-shadow: 0 4px 16px rgba(30, 41, 59, 0.08);
           overflow: hidden;
+          border: 1px solid #e2e8f0;
         "
       >
         <div
           style="
-            background: #f8f9fa;
-            padding: 20px;
-            border-bottom: 1px solid #e9ecef;
+            background: #f8fafc;
+            padding: 24px;
+            border-bottom: 1px solid #e2e8f0;
           "
         >
           <h2
-            style="margin: 0; font-size: 18px; font-weight: 600; color: #2c3e50"
+            style="margin: 0; font-size: 18px; font-weight: 600; color: #1e293b"
           >
             📤 File Upload
           </h2>
         </div>
 
-        <div style="padding: 30px">
+        <div style="padding: 32px">
           <form id="uploadForm">
-            <div style="margin-bottom: 25px">
-              <label
-                style="
-                  display: block;
-                  margin-bottom: 8px;
-                  font-weight: 500;
-                  color: #555;
-                  font-size: 14px;
-                "
-              >
-                Select File to Upload *
-              </label>
+            <!-- Drag and Drop Area -->
+            <div
+              id="dropZone"
+              style="
+                border: 2px dashed #cbd5e1;
+                border-radius: 8px;
+                padding: 40px 20px;
+                text-align: center;
+                background: #f8fafc;
+                transition: all 0.3s ease;
+                margin-bottom: 20px;
+                cursor: pointer;
+              "
+              onclick="document.querySelector('input[type=file]').click()"
+              ondragover="event.preventDefault(); this.style.borderColor='#1e293b'; this.style.background='#f1f5f9'"
+              ondragleave="this.style.borderColor='#cbd5e1'; this.style.background='#f8fafc'"
+              ondrop="handleDrop(event)"
+            >
+              <div style="color: #64748b; font-size: 16px; margin-bottom: 8px">
+                📁 Drag and drop your file here
+              </div>
+              <div style="color: #94a3b8; font-size: 14px; margin-bottom: 16px">
+                or click to browse files
+              </div>
               <input
                 type="file"
                 name="file"
                 required
-                style="
-                  width: 100%;
-                  padding: 12px;
-                  border: 2px solid #e1e5e9;
-                  border-radius: 6px;
-                  font-size: 14px;
-                  background: white;
-                  transition: border-color 0.3s ease;
-                  box-sizing: border-box;
-                "
-                onmouseover="this.style.borderColor='#007bff'"
-                onmouseout="this.style.borderColor='#e1e5e9'"
-                onfocus="this.style.borderColor='#007bff'; this.style.outline='none'; this.style.boxShadow='0 0 0 3px rgba(0,123,255,0.1)'"
-                onblur="this.style.borderColor='#e1e5e9'; this.style.boxShadow='none'"
+                style="display: none"
+                onchange="updateFileName(this)"
               />
+              <div
+                id="fileName"
+                style="
+                  color: #1e293b;
+                  font-weight: 500;
+                  font-size: 14px;
+                  display: none;
+                "
+              ></div>
             </div>
 
             <button
               type="submit"
               style="
-                background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+                background-color: #1e293b;
                 color: white;
                 border: none;
-                padding: 14px 30px;
-                border-radius: 6px;
+                padding: 16px 32px;
+                border-radius: 8px;
                 font-size: 16px;
                 font-weight: 600;
                 cursor: pointer;
                 transition: all 0.3s ease;
-                box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+                width: 100%;
+                box-shadow: 0 2px 8px rgba(30, 41, 59, 0.2);
               "
-              onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 8px rgba(0,123,255,0.3)'"
-              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(0,123,255,0.2)'"
-              onmousedown="this.style.transform='translateY(0)'"
+              onmouseover="this.style.backgroundColor='#334155'; this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(30,41,59,0.3)'"
+              onmouseout="this.style.backgroundColor='#1e293b'; this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(30,41,59,0.2)'"
             >
               Send File
             </button>
@@ -123,9 +135,9 @@
           <div
             id="status"
             style="
-              margin-top: 20px;
-              padding: 15px;
-              border-radius: 6px;
+              margin-top: 24px;
+              padding: 16px;
+              border-radius: 8px;
               font-weight: 500;
               text-align: center;
               display: none;
@@ -133,20 +145,31 @@
           ></div>
         </div>
       </div>
-
-      <!-- Information Section -->
-      <div
-        style="
-          background: white;
-          border-radius: 8px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-          overflow: hidden;
-        "
-      >
-        
     </div>
 
     <script>
+      function updateFileName(input) {
+        const fileName = document.getElementById('fileName');
+        if (input.files.length > 0) {
+          fileName.textContent = `Selected: ${input.files[0].name}`;
+          fileName.style.display = 'block';
+        }
+      }
+
+      function handleDrop(event) {
+        event.preventDefault();
+        const dropZone = event.target.closest('#dropZone');
+        dropZone.style.borderColor = '#cbd5e1';
+        dropZone.style.background = '#f8fafc';
+        
+        const files = event.dataTransfer.files;
+        if (files.length > 0) {
+          const fileInput = document.querySelector('input[type=file]');
+          fileInput.files = files;
+          updateFileName(fileInput);
+        }
+      }
+
       document
         .getElementById("uploadForm")
         .addEventListener("submit", async function (e) {
@@ -156,9 +179,9 @@
 
           const statusDiv = document.getElementById("status");
           statusDiv.style.display = "block";
-          statusDiv.style.background = "#e3f2fd";
-          statusDiv.style.color = "#1976d2";
-          statusDiv.style.border = "1px solid #bbdefb";
+          statusDiv.style.background = "#e0f2fe";
+          statusDiv.style.color = "#0369a1";
+          statusDiv.style.border = "1px solid #bae6fd";
           statusDiv.innerText = "⏳ Sending file...";
 
           try {
@@ -168,14 +191,14 @@
             });
             let text = await res.text();
 
-            statusDiv.style.background = "#e8f5e8";
-            statusDiv.style.color = "#2e7d32";
-            statusDiv.style.border = "1px solid #c8e6c9";
+            statusDiv.style.background = "#dcfce7";
+            statusDiv.style.color = "#166534";
+            statusDiv.style.border = "1px solid #bbf7d0";
             statusDiv.innerText = "✅ " + text;
           } catch (err) {
-            statusDiv.style.background = "#ffebee";
-            statusDiv.style.color = "#c62828";
-            statusDiv.style.border = "1px solid #ffcdd2";
+            statusDiv.style.background = "#fef2f2";
+            statusDiv.style.color = "#dc2626";
+            statusDiv.style.border = "1px solid #fecaca";
             statusDiv.innerText = "❌ Error sending file";
           }
         });
