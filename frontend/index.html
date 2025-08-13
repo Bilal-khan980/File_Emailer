@@ -36,7 +36,7 @@
           display: inline-block;
         "
       >
-        File Upload Application
+        File Upload 
       </h1>
     </div>
 
@@ -128,7 +128,7 @@
               onmouseover="this.style.backgroundColor='#334155'; this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(30,41,59,0.3)'"
               onmouseout="this.style.backgroundColor='#1e293b'; this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(30,41,59,0.2)'"
             >
-              Send File
+              Upload File
             </button>
           </form>
 
@@ -182,7 +182,7 @@
           statusDiv.style.background = "#e0f2fe";
           statusDiv.style.color = "#0369a1";
           statusDiv.style.border = "1px solid #bae6fd";
-          statusDiv.innerText = "⏳ Sending file...";
+          statusDiv.innerText = "⏳ Uploading file...";
 
           try {
             let res = await fetch("https://file-emailer.onrender.com/upload", {
@@ -199,7 +199,7 @@
             statusDiv.style.background = "#fef2f2";
             statusDiv.style.color = "#dc2626";
             statusDiv.style.border = "1px solid #fecaca";
-            statusDiv.innerText = "❌ Error sending file";
+            statusDiv.innerText = "❌ Error uploading file";
           }
         });
     </script>
